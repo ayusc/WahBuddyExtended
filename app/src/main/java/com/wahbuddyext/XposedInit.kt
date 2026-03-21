@@ -40,8 +40,6 @@ class XposedInit : IXposedHookLoadPackage {
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName != "com.whatsapp") return
-
-        // Hook the main process not subprocesses
         if (lpparam.processName != "com.whatsapp") return
 
         bypassSSLValidation()
@@ -69,41 +67,35 @@ class XposedInit : IXposedHookLoadPackage {
 
     private fun syncAboutLoop(app: Application, classLoader: ClassLoader) {
         val handler = Handler(Looper.getMainLooper())
-
         lateinit var task: Runnable
 
         task = object : Runnable {
             override fun run() {
                 executor.execute {
-                    try {
                         val quote = fetchRandomQuote()
                         val emoji = fetchRandomEmoji(quote)
-
-                        log("[WahBuddy] About Edited: \"$quote\" $emoji")
-
                         val dispatcher = XposedHelpers.newInstance(classLoader.loadClass("X.7gI"))
                         val depO2 = XposedHelpers.newInstance(classLoader.loadClass("X.8LM"), app, 31)
                         val depO1 = XposedHelpers.newInstance(classLoader.loadClass("X.8LC"), app, app, app, 1)
-
+                        
                         XposedHelpers.callMethod(dispatcher, "A05", quote, emoji, depO1, depO2, 86400L, false)
-                    } catch (e: Exception) {
-                        log("[WahBuddy] Loop Error: ${e.message}")
-                    }
+                        
+                        log("[WahBuddy] About Edited.")
                 }
 
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"))
                 val currentSeconds = calendar.get(Calendar.SECOND)
-                val initialDelay = (60 - currentSeconds) * 1000L
+                val delayToNextMinute = (60 - currentSeconds) * 1000L
 
-                log("[WahBuddy] Scheduling Auto About update after ${initialDelay / 1000} seconds")
-
-                handler.postDelayed(task, initialDelay)
+                handler.postDelayed(task, delayToNextMinute)
             }
         }
 
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"))
         val currentSeconds = calendar.get(Calendar.SECOND)
         val initialDelay = (60 - currentSeconds) * 1000L
+
+        log("[WahBuddy] Starting auto update in ${initialDelay / 1000} seconds...")
 
         handler.postDelayed(task, initialDelay)
     }
