@@ -35,7 +35,11 @@ import java.util.concurrent.Executors
 
 class XposedInit : IXposedHookLoadPackage {
 
-    private var isLoopActive = false
+    companion object {
+        @Volatile
+        private var isLoopActive = false
+    }
+
     private val executor = Executors.newSingleThreadExecutor()
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
@@ -72,6 +76,7 @@ class XposedInit : IXposedHookLoadPackage {
         task = object : Runnable {
             override fun run() {
                 executor.execute {
+                    try {
                         val quote = fetchRandomQuote()
                         val emoji = fetchRandomEmoji(quote)
                         val dispatcher = XposedHelpers.newInstance(classLoader.loadClass("X.7gI"))
@@ -81,6 +86,8 @@ class XposedInit : IXposedHookLoadPackage {
                         XposedHelpers.callMethod(dispatcher, "A05", quote, emoji, depO1, depO2, 86400L, false)
                         
                         log("[WahBuddy] About Edited.")
+                    } catch (e: Exception) {
+                    }
                 }
 
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"))
