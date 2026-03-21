@@ -69,13 +69,14 @@ class XposedInit : IXposedHookLoadPackage {
 
     private fun syncAboutLoop(app: Application, classLoader: ClassLoader) {
         val handler = Handler(Looper.getMainLooper())
-        
-        val task = object : Runnable {
+
+        lateinit var task: Runnable
+
+        task = object : Runnable {
             override fun run() {
                 executor.execute {
                     try {
                         val quote = fetchRandomQuote()
-                        
                         val emoji = fetchRandomEmoji(quote)
 
                         log("[WahBuddy] About Edited: \"$quote\" $emoji")
@@ -95,7 +96,7 @@ class XposedInit : IXposedHookLoadPackage {
                 val initialDelay = (60 - currentSeconds) * 1000L
 
                 log("[WahBuddy] Scheduling Auto About update after ${initialDelay / 1000} seconds")
-                
+
                 handler.postDelayed(task, initialDelay)
             }
         }
@@ -103,7 +104,7 @@ class XposedInit : IXposedHookLoadPackage {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"))
         val currentSeconds = calendar.get(Calendar.SECOND)
         val initialDelay = (60 - currentSeconds) * 1000L
-        
+
         handler.postDelayed(task, initialDelay)
     }
 
@@ -123,16 +124,16 @@ class XposedInit : IXposedHookLoadPackage {
             val url = URL("https://emojihub.yurace.pro/api/random")
             val conn = url.openConnection() as HttpURLConnection
             conn.connectTimeout = 5000
-            
+
             val response = conn.inputStream.bufferedReader().readText()
             val json = JSONObject(response)
-            
+
             val htmlCode = json.getJSONArray("htmlCode").getString(0)
             val unicodeString = htmlCode.replace("&#", "").replace(";", "")
             String(Character.toChars(unicodeString.toInt()))
 
         } catch (e: Exception) {
-            "💬" 
+            "💬"
         }
     }
 
