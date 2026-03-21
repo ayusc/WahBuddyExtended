@@ -46,7 +46,7 @@ class XposedInit : IXposedHookLoadPackage {
 
         try {
             XposedHelpers.findAndHookMethod(
-                "com.whatsapp.AppShell",
+                "android.app.Application",
                 lpparam.classLoader,
                 "onCreate",
                 object : XC_MethodHook() {
