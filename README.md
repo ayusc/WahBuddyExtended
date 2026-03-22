@@ -21,8 +21,11 @@ This is made just for fun and pranking with my friends, although I might be stup
 ## Success Logs should look like this: 
 
 ```
-[ 2026-03-21T15:53:49.498    10302:  6614:  6614 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] Hooked to WhatsApp Sucessfully !
-[ 2026-03-21T15:54:04.209    10302:  6614:  7859 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited: "Truth is powerful and it prevails." 🐢
-[ 2026-03-21T15:55:02.258    10302:  6614:  7859 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited: "You won't skid if you stay in a rut." ⛹
-[ 2026-03-21T15:56:02.333    10302:  6614:  7859 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited: "Time is the wisest counsellor of all." 🐡
+[ 2026-03-22T20:26:51.671    10302: 18346: 18346 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] Hooked to WhatsApp Sucessfully !
+[ 2026-03-22T20:26:51.672    10302: 18346: 18346 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] Starting auto update in 9 seconds...
+[ 2026-03-22T20:27:04.323    10302: 18346: 18510 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited.
+[ 2026-03-22T20:28:03.144    10302: 18346: 18510 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited.
+[ 2026-03-22T20:29:03.990    10302: 18346: 18510 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited.
+[ 2026-03-22T20:30:03.188    10302: 18346: 18510 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited.
+[ 2026-03-22T20:31:03.171    10302: 18346: 18510 I/LSPosedFramework ] [com.wahbuddyext,XposedBridge] [WahBuddy] About Edited.
 ```
