@@ -130,27 +130,20 @@ class XposedInit: IXposedHookLoadPackage {
     }
 
     private fun fetchRandomEmoji(text: String): String {
-        val words = text.replace(Regex("[^a-zA-Z ]"), "").split(" ")
-        val keyword = words.maxByOrNull { it.length } ?: "smile"
-
         val result = runCatching {
-            val url = URL("https://emojihub.yurace.pro/api/random")
+            val url = URL("https://emojihub.yurace.pro/api/random/group/face-positive")
             val conn = url.openConnection() as HttpURLConnection
             conn.connectTimeout = 5000
-
-            if (conn.responseCode == HttpURLConnection.HTTP_OK) {
-                val response = conn.inputStream.bufferedReader().readText()
-                val json = JSONObject(response)
-                val htmlCode = json.getJSONArray("htmlCode").getString(0)
-                val unicodeString = htmlCode.replace("&#", "").replace(";", "")
-                String(Character.toChars(unicodeString.toInt()))
-            } else {
-                "💬"
-            }
+            require(conn.responseCode == HttpURLConnection.HTTP_OK) { "Server returned an error" }
+            val response = conn.inputStream.bufferedReader().readText()
+            val json = JSONObject(response)
+            val htmlCode = json.getJSONArray("htmlCode").getString(0)
+            val unicodeString = htmlCode.replace("&#", "").replace(";", "")
+            String(Character.toChars(unicodeString.toInt()))
         }
-        return result.getOrDefault("💬")
+        return result.getOrDefault("😀") 
     }
-
+    
     private fun bypassSSLValidation() {
         runCatching {
             val trustAllCerts = arrayOf<TrustManager>(object: X509TrustManager {
