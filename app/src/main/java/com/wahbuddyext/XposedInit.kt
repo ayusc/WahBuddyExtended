@@ -92,9 +92,9 @@ class XposedInit: IXposedHookLoadPackage {
                     try {
                         val quote = fetchRandomQuote()
                         val emoji = fetchRandomEmoji(quote)
-                        val dispatcher = XposedHelpers.newInstance(classLoader.loadClass("X.7gI"))
-                        val depO2 = XposedHelpers.newInstance(classLoader.loadClass("X.8LM"), app, 31)
-                        val depO1 = XposedHelpers.newInstance(classLoader.loadClass("X.8LC"), app, app, app, 1)
+                        val dispatcher = XposedHelpers.newInstance(classLoader.loadClass("X.CDy"))
+                        val depO2 = XposedHelpers.newInstance(classLoader.loadClass("X.5NW"), app, 31)
+                        val depO1 = XposedHelpers.newInstance(classLoader.loadClass("X.5NS"), app, app, app, 1)
 
                         XposedHelpers.callMethod(dispatcher, "A05", quote, emoji, depO1, depO2, 86400L, false)
 
