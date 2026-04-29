@@ -1,7 +1,7 @@
 > [!NOTE]
 > Whew, it was a hard time reverse engineering Whatsapp (all thanks to ProGuard) 
 > <br>If you like it please give it a star 🌟
-> <br><br>Only works on version 2.26.10.72 (Latest as of now)
+> <br><br>Only works on version 2.26.16.72 (Latest as of now)
 
 # WahBuddy Extended
 An Lsposed module to automatically update the user's About status in Whatsapp
